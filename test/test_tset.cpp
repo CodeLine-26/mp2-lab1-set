@@ -295,3 +295,46 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+
+
+
+
+
+
+
+//вставка нескольких элементов
+TEST(TSet, can_insert_multiple_elements)
+{
+	const int size = 10;
+	TSet set(size);
+
+	set.InsElem(1);
+	set.InsElem(3);
+	set.InsElem(5);
+	set.InsElem(7);
+
+	EXPECT_NE(set.IsMember(1), 0);
+	EXPECT_NE(set.IsMember(3), 0);
+	EXPECT_NE(set.IsMember(5), 0);
+	EXPECT_NE(set.IsMember(7), 0);
+
+	EXPECT_EQ(set.IsMember(2), 0);
+}
+
+//удаление всех элементов
+TEST(TSet, can_delete_all_elements)
+{
+	const int size = 5;
+	TSet set(size);
+
+	set.InsElem(0);
+	set.InsElem(1);
+
+	set.DelElem(0);
+	set.DelElem(1);
+
+	EXPECT_EQ(set.IsMember(0), 0);
+	EXPECT_EQ(set.IsMember(1), 0);
+}
+

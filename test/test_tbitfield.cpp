@@ -216,7 +216,6 @@ TEST(TBitField, and_operator_applied_to_bitfields_of_non_equal_size)
   // bf2 = 01010
   bf2.SetBit(1);
   bf2.SetBit(3);
-
   // expBf = 00010
   expBf.SetBit(3);
 
@@ -308,4 +307,66 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
   bf2.SetBit(2);
 
   EXPECT_NE(bf1, bf2);
+}
+
+
+
+
+
+
+
+
+
+
+
+// создать битовое поле нулевой длинны
+TEST(TBitField, can_create_bitfield_with_zero_length)
+{
+    ASSERT_NO_THROW(TBitField bf(0));
+}
+
+
+// установка и очистка бита
+TEST(TBitField, can_set_and_clear_all_bits)
+{
+    const int size = 8;
+    TBitField bf(size);
+
+    // Установите все биты
+    for (int i = 0; i < size; i++)
+    {
+        bf.SetBit(i);
+    }
+    // удостоверились что все биты установлены
+    for (int i = 0; i < size; i++)
+    {
+        EXPECT_EQ(1, bf.GetBit(i));
+    }
+
+    // очистка всех битов
+    for (int i = 0; i < size; i++)
+    {
+        bf.ClrBit(i);
+    }
+
+    // удостоверились что все биты очищены
+    for (int i = 0; i < size; i++)
+    {
+        EXPECT_EQ(0, bf.GetBit(i));
+    }
+}
+
+// рвенство битов в разных состояниях
+TEST(TBitField, two_bitfields_with_same_size_are_equal_if_they_have_same_bits)
+{
+    const int size = 5;
+    TBitField bf1(size), bf2(size);
+ 
+    bf1.SetBit(0);
+    bf1.SetBit(2);
+
+    bf2.SetBit(0);
+    bf2.SetBit(2);
+
+    EXPECT_EQ(bf1, bf2);
 }
