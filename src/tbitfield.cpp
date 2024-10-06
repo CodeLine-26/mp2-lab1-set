@@ -33,17 +33,17 @@ TBitField::TBitField(int len)
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
 {
-    if (bf.BitLem >= 0)
+    if (bf.BitLen >= 0)
     {
         BitLen = bf.BitLen;
         MemLen = bf.MemLen;
         pMem = new TELEM[MemLen];
         for (int i = 0; i < MemLen; i++)
-            pMemp[i] = bf.pMem[i];
+            pMem[i] = bf.pMem[i];
     }
     else
     {
-        throw("Ошибка len < 0")
+        throw("Ошибка len < 0");
     }
 }
 
@@ -69,7 +69,7 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска дл
 {
     if (n<0 || n>BitLen)
     {
-        throw ("Ошибка. Битовый номер недопустим для поля бит")
+        throw ("Ошибка. Битовый номер недопустим для поля бит");
     }
     else
     {
@@ -164,7 +164,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
     int i;
     int len = BitLen;
     if (len < bf.BitLen)
-        len = bf.Bitlen;
+        len = bf.BitLen;
 
     TBitField tbf(len);
     for (i = 0; i < MemLen; i++)
@@ -205,7 +205,7 @@ TBitField TBitField::operator~(void) // отрицание
     TBitField tbf = (*this);
     for (int i = 0; i < BitLen; i++)
     {
-        if (tdf.GetBit(i))
+        if (tbf.GetBit(i))
             tbf.ClrBit(i);
         else
             tbf.SetBit(i);

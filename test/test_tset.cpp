@@ -301,40 +301,37 @@ TEST(TSet, check_negation_operator)
 
 
 
-
-
-//вставка нескольких элементов
-TEST(TSet, can_insert_multiple_elements)
+TEST(TSet, throws_when_out_of_range_DelElem)
 {
-	const int size = 10;
-	TSet set(size);
-
-	set.InsElem(1);
-	set.InsElem(3);
-	set.InsElem(5);
-	set.InsElem(7);
-
-	EXPECT_NE(set.IsMember(1), 0);
-	EXPECT_NE(set.IsMember(3), 0);
-	EXPECT_NE(set.IsMember(5), 0);
-	EXPECT_NE(set.IsMember(7), 0);
-
-	EXPECT_EQ(set.IsMember(2), 0);
+	TSet set1(50);
+	ASSERT_ANY_THROW(set1.DelElem(10));
 }
 
-//удаление всех элементов
-TEST(TSet, can_delete_all_elements)
+
+TEST(TSet, can_combine_three_sets_of_equal_size)
 {
-	const int size = 5;
-	TSet set(size);
+	const int size = 20;
+	TSet set1(size), set2(size), set3(size), set4(size), expSet(size);
 
-	set.InsElem(0);
-	set.InsElem(1);
+	set1.InsElem(3);
+	set1.InsElem(4);
+	set1.InsElem(5);
 
-	set.DelElem(0);
-	set.DelElem(1);
+	set2.InsElem(0);
+	set2.InsElem(11);
+	set2.InsElem(4);
 
-	EXPECT_EQ(set.IsMember(0), 0);
-	EXPECT_EQ(set.IsMember(1), 0);
+	set3.InsElem(6);
+	set3.InsElem(6);
+	set3.InsElem(6);
+	set4 = set1 + set2 + set3;
+
+	expSet.InsElem(0);
+	expSet.InsElem(3);
+	expSet.InsElem(4);
+	expSet.InsElem(5);
+	expSet.InsElem(6);
+	expSet.InsElem(11);
+
+	EXPECT_EQ(expSet, set4);
 }
-
