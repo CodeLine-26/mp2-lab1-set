@@ -303,8 +303,8 @@ TEST(TSet, check_negation_operator)
 
 TEST(TSet, throws_when_out_of_range_DelElem)
 {
-	TSet set1(50);
-	ASSERT_ANY_THROW(set1.DelElem(10));
+	TSet set1(40);
+	ASSERT_ANY_THROW(set1.DelElem(40));
 }
 
 
