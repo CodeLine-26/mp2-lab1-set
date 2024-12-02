@@ -15,7 +15,7 @@ protected:
         bf->SetBit(3);
     }
 
-    void Destroy()
+    void TearDown()
     {
         delete bf;
     }

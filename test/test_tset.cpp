@@ -12,7 +12,7 @@ protected:
 		s = new TSet(5);
 	}
 
-	void Destroy()
+	void TearDown()
 	{
 		delete s;
 	}
